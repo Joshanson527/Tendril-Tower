@@ -9,14 +9,21 @@ size = Vector2(640, 16)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Character" parent="." instance=ExtResource("1_qo5qs")]
-position = Vector2(0, -25)
-script = null
+[node name="Block1" parent="." instance=ExtResource("3_vsip8")]
+position = Vector2(-225, -192)
+scale = Vector2(0.5, 0.5)
 
-[node name="Camera2D" type="Camera2D" parent="Character"]
-position = Vector2(0, -11)
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
+[node name="Block2" parent="." instance=ExtResource("3_vsip8")]
+position = Vector2(-86, -221)
+scale = Vector2(0.5, 0.5)
+
+[node name="Block3" parent="." instance=ExtResource("3_vsip8")]
+position = Vector2(93, -186)
+scale = Vector2(0.5, 0.5)
+
+[node name="Block4" parent="." instance=ExtResource("3_vsip8")]
+position = Vector2(223, -227)
+scale = Vector2(0.5, 0.5)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -27,18 +34,9 @@ shape = SubResource("RectangleShape2D_hqwsb")
 scale = Vector2(5, 0.125)
 texture = ExtResource("2_4a443")
 
-[node name="Node2D" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(-219, -86)
-scale = Vector2(0.25, 0.25)
+[node name="Character" parent="." instance=ExtResource("1_qo5qs")]
+position = Vector2(0, -10)
 
-[node name="Node2D2" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(-101, -120)
-scale = Vector2(0.25, 0.25)
-
-[node name="Node2D3" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(50, -137)
-scale = Vector2(0.25, 0.25)
-
-[node name="Node2D4" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(185, -99)
-scale = Vector2(0.25, 0.25)
+[node name="Camera2D" type="Camera2D" parent="Character"]
+position = Vector2(0, -12)
+zoom = Vector2(2, 2)
