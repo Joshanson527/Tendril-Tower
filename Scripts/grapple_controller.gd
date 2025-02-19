@@ -33,6 +33,7 @@ func _process(delta):
 
 func launch():
 	if ray.is_colliding():
+		rest_length = 60.0
 		launched = true
 		target = ray.get_collision_point()
 		rope.show()
@@ -40,7 +41,6 @@ func launch():
 func retract():
 	launched = false
 	rope.hide()
-	rest_length = 60.0
 
 func handle_grapple(delta):
 	var target_dir = player.global_position.direction_to(target)

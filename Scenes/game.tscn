@@ -1,7 +1,17 @@
-[gd_scene load_steps=5 format=4 uid="uid://c3pov7iy11n5i"]
+[gd_scene load_steps=12 format=4 uid="uid://c3pov7iy11n5i"]
 
 [ext_resource type="PackedScene" uid="uid://cd8ui778jcwa5" path="res://Scenes/player.tscn" id="1_qo5qs"]
 [ext_resource type="Texture2D" uid="uid://c6fite2qrlw4o" path="res://Assets/brick.png" id="2_rvyiv"]
+[ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="3_q2vnv"]
+[ext_resource type="Shader" path="res://Scripts/blur.gdshader" id="3_q11j1"]
+[ext_resource type="Texture2D" uid="uid://b0oom6y5tw7li" path="res://Assets/icon.svg" id="4_eatly"]
+[ext_resource type="FontFile" uid="uid://b4qjra5pja0aa" path="res://Assets/upheavtt.ttf" id="5_o8e1m"]
+[ext_resource type="Script" path="res://Scripts/quit_button.gd" id="5_owtng"]
+[ext_resource type="Script" path="res://Scripts/game_transition.gd" id="7_2ufiu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mdeka"]
+shader = ExtResource("3_q11j1")
+shader_parameter/lod = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y7ekn"]
 texture = ExtResource("2_rvyiv")
@@ -14,11 +24,42 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_y7ekn")
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 
 [node name="Character" parent="." instance=ExtResource("1_qo5qs")]
 position = Vector2(0, -10)
 scale = Vector2(1.25, 1.25)
+
+[node name="PauseMenu" type="Control" parent="Character"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_left = -230.4
+offset_top = -141.6
+offset_right = -190.4
+offset_bottom = -101.6
+script = ExtResource("3_q2vnv")
+
+[node name="Blur" type="Sprite2D" parent="Character/PauseMenu"]
+z_index = 5
+material = SubResource("ShaderMaterial_mdeka")
+position = Vector2(-58.4, -129.6)
+scale = Vector2(24.0781, 22.7812)
+texture = ExtResource("4_eatly")
+
+[node name="Quit" type="Button" parent="Character/PauseMenu"]
+process_mode = 3
+z_index = 10
+layout_mode = 0
+offset_left = -150.0
+offset_top = 10.0
+offset_right = -2.0
+offset_bottom = 36.0
+scale = Vector2(0.75, 0.75)
+theme_override_fonts/font = ExtResource("5_o8e1m")
+theme_override_font_sizes/font_size = 20
+text = "Quit to title"
+script = ExtResource("5_owtng")
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 position = Vector2(0, -12)
@@ -26,6 +67,25 @@ zoom = Vector2(2, 2)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="Transition" type="ColorRect" parent="Character"]
+z_index = 15
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1000.0
+offset_top = -500.0
+offset_right = 1000.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("7_2ufiu")
+
+[node name="TileMap" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("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")
 tile_set = SubResource("TileSet_j3xmp")
+
+[connection signal="pressed" from="Character/PauseMenu/Quit" to="Character/PauseMenu/Quit" method="_on_pressed"]
+[connection signal="pressed" from="Character/PauseMenu/Quit" to="Character/Transition" method="_on_quit_pressed"]
