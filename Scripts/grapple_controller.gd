@@ -8,8 +8,8 @@ extends Node2D
 @onready var ray := $RayCast2D
 @onready var rope := $Line2D
 
-var launched = false
-var target: Vector2
+@export var launched = false
+@export var target: Vector2
 
 func _process(delta):
 	ray.look_at(get_global_mouse_position())
@@ -21,6 +21,9 @@ func _process(delta):
 	
 	if launched:
 		handle_grapple(delta)
+	else:
+		target = position
+		target.x += 100
 
 func launch():
 	if ray.is_colliding():

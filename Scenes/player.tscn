@@ -263,7 +263,7 @@ stiffness = 75.0
 damping = 10.0
 
 [node name="RayCast2D" type="RayCast2D" parent="GrappleController"]
-target_position = Vector2(150, 0)
+target_position = Vector2(100, 0)
 
 [node name="Line2D" type="Line2D" parent="GrappleController"]
 z_index = -1
