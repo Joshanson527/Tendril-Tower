@@ -1,52 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3pov7iy11n5i"]
+[gd_scene load_steps=5 format=4 uid="uid://c3pov7iy11n5i"]
 
 [ext_resource type="PackedScene" uid="uid://cd8ui778jcwa5" path="res://Scenes/player.tscn" id="1_qo5qs"]
-[ext_resource type="Texture2D" uid="uid://b0oom6y5tw7li" path="res://Assets/icon.svg" id="2_4a443"]
-[ext_resource type="PackedScene" uid="uid://y7esdqqmg7tl" path="res://Scenes/block.tscn" id="3_vsip8"]
+[ext_resource type="Texture2D" uid="uid://c6fite2qrlw4o" path="res://Assets/brick.png" id="2_rvyiv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqwsb"]
-size = Vector2(640, 16)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y7ekn"]
+texture = ExtResource("2_rvyiv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_j3xmp"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_y7ekn")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Block1" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(-151, -111)
-scale = Vector2(0.25, 0.25)
-
-[node name="Block2" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(-56, -146)
-scale = Vector2(0.25, 0.25)
-
-[node name="Block3" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(56, -111)
-scale = Vector2(0.25, 0.25)
-
-[node name="Block4" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(162, -152)
-scale = Vector2(0.25, 0.25)
-
-[node name="Block5" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(-252, -144)
-scale = Vector2(0.25, 0.25)
-
-[node name="Block6" parent="." instance=ExtResource("3_vsip8")]
-position = Vector2(258, -114)
-scale = Vector2(0.25, 0.25)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_hqwsb")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(5, 0.125)
-texture = ExtResource("2_4a443")
-
 [node name="Character" parent="." instance=ExtResource("1_qo5qs")]
 position = Vector2(0, -10)
+scale = Vector2(1.25, 1.25)
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 position = Vector2(0, -12)
 zoom = Vector2(2, 2)
 process_callback = 0
 position_smoothing_enabled = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("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")
+tile_set = SubResource("TileSet_j3xmp")

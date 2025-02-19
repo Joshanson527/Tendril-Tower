@@ -242,13 +242,16 @@ height = 24.0
 
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(0, 12)
+collision_layer = 2
 script = ExtResource("1_u26kt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 3
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_fdf8f")
-animation = &"up"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.124118
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -258,18 +261,14 @@ shape = SubResource("CapsuleShape2D_vxup0")
 [node name="GrappleController" type="Node2D" parent="."]
 position = Vector2(0, -12)
 script = ExtResource("3_igjp6")
-rest_length = 60.0
-stiffness = 75.0
-damping = 10.0
 
 [node name="RayCast2D" type="RayCast2D" parent="GrappleController"]
-target_position = Vector2(100, 0)
+target_position = Vector2(150, 0)
 
 [node name="Line2D" type="Line2D" parent="GrappleController"]
-z_index = -1
+z_index = 1
 points = PackedVector2Array(0, 0, 0, 0)
 width = 15.0
-default_color = Color(0, 0.508417, 0, 1)
 texture = ExtResource("4_4rdwv")
 texture_mode = 2
 
@@ -286,3 +285,9 @@ health = NodePath("../Health")
 visible = false
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_tvgbv")
+
+[node name="Crosshair" type="Polygon2D" parent="."]
+z_index = 2
+color = Color(0.0836193, 0.564009, 0.202407, 1)
+offset = Vector2(0, -12)
+polygon = PackedVector2Array(4, 1, 4, -1, 1, -1, 1, -4, -1, -4, -1, -1, -4, -1, -4, 1, -1, 1, -1, 4, 1, 4, 1, 1)

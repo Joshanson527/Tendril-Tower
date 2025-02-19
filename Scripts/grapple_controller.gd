@@ -1,12 +1,13 @@
 extends Node2D
 
-@export var rest_length = 200.0
-@export var stiffness = 15.0
-@export var damping = 1.0
+@export var rest_length = 60.0
+@export var stiffness = 75.0
+@export var damping = 10.0
 
 @onready var player := get_parent()
 @onready var ray := $RayCast2D
 @onready var rope := $Line2D
+@onready var crosshair := $"../Crosshair"
 
 @export var launched = false
 @export var target: Vector2
@@ -20,10 +21,15 @@ func _process(delta):
 		retract()
 	
 	if launched:
+		set_crosshair(target, true)
 		handle_grapple(delta)
 	else:
-		target = position
-		target.x += 100
+		if ray.is_colliding():
+			set_crosshair(ray.get_collision_point(), true)
+		else:
+			target = position
+			target.x += 100
+			set_crosshair(target, false)
 
 func launch():
 	if ray.is_colliding():
@@ -34,6 +40,7 @@ func launch():
 func retract():
 	launched = false
 	rope.hide()
+	rest_length = 60.0
 
 func handle_grapple(delta):
 	var target_dir = player.global_position.direction_to(target)
@@ -57,3 +64,10 @@ func handle_grapple(delta):
 
 func update_rope():
 	rope.set_point_position(1, to_local(target))
+
+func set_crosshair(crosshair_target: Vector2, visibility: bool):
+	crosshair.position = to_local(crosshair_target)
+	if visibility:
+		crosshair.show()
+	else:
+		crosshair.hide()
