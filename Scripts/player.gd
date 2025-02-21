@@ -1,20 +1,36 @@
 extends CharacterBody2D
 
+signal respawn(current_checkpoint)
+
 const SPEED = 100.0
 const JUMP_VELOCITY = -200.0
 const ACCELERATION = 0.1
 const DECELERATION = 0.1
+
+var checkpoints: Array = [$"../checkpoint_0"]
+var current_checkpoint
 
 @onready var gc := $GrappleController
 @onready var sprite := $AnimatedSprite2D
 
 @export var rotation_speed: float = 10.0
 
+func _process(delta):
+	var closest_distance: float = 999.0
+	var closest_checkpoint
+	for checkpoint in checkpoints:
+		var distance = abs(self.global_position - checkpoint.global_position)
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_checkpoint = checkpoints.find(checkpoint, 0)
+	
+	if closest_distance <= 10:
+		closest_checkpoint.unlock()
+		current_checkpoint = checkpoints.find(closest_checkpoint)
+
 func _physics_process(delta):
 	if Input.is_action_pressed("reset"):
-		var tree = get_tree()
-		if tree:
-			tree.reload_current_scene()
+		$Health.current.set(0)
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -55,3 +71,10 @@ func _physics_process(delta):
 		rotation_degrees = move_toward(rotation_degrees, 0, 100 * delta)
 	
 	move_and_slide()
+	
+func _on_health_died(entity):
+	sprite.play("die")
+	emit_signal("respawn")
+
+func _on_health_damaged(entity: Node, amount: int, applied: int) -> void:
+	sprite.play("hit")

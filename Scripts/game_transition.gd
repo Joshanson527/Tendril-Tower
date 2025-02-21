@@ -15,3 +15,8 @@ func fade_out():
 
 func _on_quit_pressed() -> void:
 	fade_in()
+
+func _on_character_respawn(current_checkpoint: Variant) -> void:
+	fade_in()
+	await get_tree().create_timer(1).timeout
+	fade_out()
