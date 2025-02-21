@@ -3,7 +3,7 @@ extends Button
 @onready var transition := $"../Transition"
 
 func _on_pressed() -> void:
-	transition.slide_in()
+	transition.fade_in()
 	await get_tree().create_timer(1).timeout
 	
 	var tree = get_tree()

@@ -1,20 +1,51 @@
-[gd_scene load_steps=5 format=3 uid="uid://gyuqs5n38mnv"]
+[gd_scene load_steps=8 format=3 uid="uid://gyuqs5n38mnv"]
 
 [ext_resource type="Script" path="res://Scripts/start_button.gd" id="1_7r064"]
 [ext_resource type="FontFile" uid="uid://b4qjra5pja0aa" path="res://Assets/upheavtt.ttf" id="1_n7osn"]
 [ext_resource type="Script" path="res://Scripts/menu_transition.gd" id="3_54vog"]
+[ext_resource type="Shader" path="res://Scripts/transition.gdshader" id="4_0vvm7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jerh"]
+shader = ExtResource("4_0vvm7")
+shader_parameter/AspectRatio = 1.5
+shader_parameter/Diamonds = 10.0
+shader_parameter/pixel_size = 0.08
+shader_parameter/height = -1.0
+shader_parameter/disable_pixel = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5nqn"]
+shader = ExtResource("4_0vvm7")
+shader_parameter/AspectRatio = 1.5
+shader_parameter/Diamonds = 29.515
+shader_parameter/pixel_size = 0.08
+shader_parameter/height = -1.0
+shader_parameter/disable_pixel = null
 
 [sub_resource type="LabelSettings" id="LabelSettings_iygiy"]
 font = ExtResource("1_n7osn")
 font_size = 100
 
 [node name="UI" type="Control"]
+material = SubResource("ShaderMaterial_6jerh")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Transition" type="ColorRect" parent="."]
+z_index = 15
+material = SubResource("ShaderMaterial_v5nqn")
+layout_mode = 0
+offset_left = 1823.0
+offset_top = 496.0
+offset_right = 3823.0
+offset_bottom = 1791.0
+rotation = 2.79253
+scale = Vector2(1.12167, 0.97623)
+color = Color(0, 0, 0, 1)
+script = ExtResource("3_54vog")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
@@ -47,15 +78,5 @@ theme_override_fonts/font = ExtResource("1_n7osn")
 theme_override_font_sizes/font_size = 40
 text = "Start"
 script = ExtResource("1_7r064")
-
-[node name="Transition" type="ColorRect" parent="."]
-z_index = 15
-layout_mode = 0
-offset_left = -424.0
-offset_top = -1053.0
-offset_right = 1576.0
-offset_bottom = -53.0
-color = Color(0, 0, 0, 1)
-script = ExtResource("3_54vog")
 
 [connection signal="pressed" from="StartButton" to="StartButton" method="_on_pressed"]

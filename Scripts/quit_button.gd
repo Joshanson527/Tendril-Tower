@@ -1,7 +1,7 @@
 extends Button
 
 var in_pos: float = 10.0
-var out_pos: float = -150.0
+var out_pos: float = -175.0
 var speed: float = 10.0
 
 func slide_in():

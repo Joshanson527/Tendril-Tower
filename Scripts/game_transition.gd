@@ -1,21 +1,12 @@
 extends ColorRect
 
-var in_pos: float = -500.0
-var out_pos: float = -1300.0
-var speed: float = 30.0
-
 func _ready():
-	slide_out()
+	fade_out()
 
-func slide_in():
-	while position.y < in_pos:
-		position.y += speed
-		await get_tree().create_timer(0.01).timeout
+func fade_in():
+	var tween := get_tree().create_tween()
+	tween.tween_property(material, "shader_parameter/height", 1.0, 1.0)
 
-func slide_out():
-	while position.y > out_pos:
-		position.y -= speed
-		await get_tree().create_timer(0.01).timeout
-
-func _on_quit_pressed() -> void:
-	slide_in()
+func fade_out():
+	var tween := get_tree().create_tween()
+	tween.tween_property(material, "shader_parameter/height", -1.0, 1.0)
