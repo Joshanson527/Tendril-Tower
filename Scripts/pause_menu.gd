@@ -1,14 +1,14 @@
 extends Control
 
 @onready var blur := $Blur
-@onready var quit_button := $Quit
+@onready var quit_button := $QuitButton
 
-func _process(delta: float) -> void:
+func _process(delta):
 	if Input.is_action_just_pressed("pause"):
 		var tree = get_tree()
 		if tree:
 			if !tree.paused:
-				blur.material.set_shader_parameter('lod', 1.5)
+				blur.material.set_shader_parameter('lod', 2.5)
 				quit_button.slide_in()
 				tree.paused = true
 			else:

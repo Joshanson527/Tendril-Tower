@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 200.0
-const JUMP_VELOCITY = -300.0
+const SPEED = 100.0
+const JUMP_VELOCITY = -200.0
 const ACCELERATION = 0.1
 const DECELERATION = 0.1
 
@@ -19,10 +19,10 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if (Input.is_action_just_pressed("increase_length") || Input.is_action_pressed("increase_length_key")) && gc.rest_length < 80:
-		gc.rest_length += 3
-	elif (Input.is_action_just_pressed("decrease_length") || Input.is_action_pressed("decrease_length_key")) && gc.rest_length > 20:
-		gc.rest_length -= 3
+	if (Input.is_action_just_pressed("increase_length") || Input.is_action_pressed("increase_length_key")) && gc.rest_length < 30:
+		gc.rest_length += 1
+	elif (Input.is_action_just_pressed("decrease_length") || Input.is_action_pressed("decrease_length_key")) && gc.rest_length > 5:
+		gc.rest_length -= 1
 	
 	var move_direction = Input.get_axis("left", "right")
 	if move_direction:

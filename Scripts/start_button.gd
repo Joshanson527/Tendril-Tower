@@ -1,6 +1,8 @@
-extends Button
+extends TextureButton
 
 @onready var transition := $"../Transition"
+
+var next_scene = preload("res://Scenes/game.tscn")
 
 func _on_pressed() -> void:
 	transition.fade_in()
@@ -8,4 +10,4 @@ func _on_pressed() -> void:
 	
 	var tree = get_tree()
 	if tree:
-		tree.change_scene_to_file("res://Scenes/game.tscn")
+		tree.change_scene_to_packed(next_scene)

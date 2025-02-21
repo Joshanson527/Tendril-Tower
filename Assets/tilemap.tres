@@ -2,24 +2,27 @@
 
 [ext_resource type="Texture2D" uid="uid://bf1m580xkeba0" path="res://Assets/tilemap.png" id="1_ul72d"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_updeg"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w11kg"]
 resource_name = "Tilemap"
 texture = ExtResource("1_ul72d")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -7, 6, -7, 6, 6, -6, 6)
 3:0/0 = 0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
-4:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -7, 6, -7, 6, 6, -6, 6)
 5:0/0 = 0
 6:0/0 = 0
+7:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
 4:1/0 = 0
-4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6, 6, -6, 6, 8, -8, 8)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, -6, 6, -6, 6, 8, -7, 8)
+6:1/0 = 0
+7:1/0 = 0
 0:2/0 = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:2/0 = 0
@@ -29,22 +32,22 @@ texture = ExtResource("1_ul72d")
 3:2/0 = 0
 3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6, 8, -6, 8, 8, -8, 8)
 4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6, 8, -6, 8, 8, -8, 8)
 5:2/0 = 0
+6:2/0 = 0
 5:3/0 = 0
 5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
 5:4/0 = 0
 5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+6:3/size_in_atlas = Vector2i(4, 2)
+6:3/0 = 0
 0:3/size_in_atlas = Vector2i(5, 1)
 0:3/0 = 0
 0:4/size_in_atlas = Vector2i(5, 1)
 0:4/0 = 0
 0:5/size_in_atlas = Vector2i(5, 1)
 0:5/0 = 0
-6:3/size_in_atlas = Vector2i(4, 2)
-6:3/0 = 0
-5:1/size_in_atlas = Vector2i(2, 1)
-5:1/0 = 0
 
 [resource]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_updeg")
+sources/1 = SubResource("TileSetAtlasSource_w11kg")

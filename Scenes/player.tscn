@@ -174,7 +174,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"grow",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -249,9 +249,8 @@ script = ExtResource("1_u26kt")
 z_index = 3
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_fdf8f")
-animation = &"idle"
+animation = &"up"
 autoplay = "idle"
-frame_progress = 0.124118
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

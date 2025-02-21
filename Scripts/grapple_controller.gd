@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var rest_length = 60.0
+@export var rest_length = 20.0
 @export var stiffness = 75.0
 @export var damping = 10.0
 
@@ -33,7 +33,7 @@ func _process(delta):
 
 func launch():
 	if ray.is_colliding():
-		rest_length = 60.0
+		rest_length = 20.0
 		launched = true
 		target = ray.get_collision_point()
 		rope.show()
