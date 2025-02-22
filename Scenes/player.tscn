@@ -25,10 +25,8 @@ script = ExtResource("1_u26kt")
 z_index = 3
 position = Vector2(0, -15)
 sprite_frames = ExtResource("2_vcd15")
-animation = &"grow"
+animation = &"die"
 autoplay = "idle"
-frame = 6
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
