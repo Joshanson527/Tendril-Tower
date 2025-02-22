@@ -22,7 +22,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/health_hitbox_hurtbox/plugin.cfg")
 
 [file_customization]
 
