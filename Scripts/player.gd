@@ -7,7 +7,7 @@ const JUMP_VELOCITY = -200.0
 const ACCELERATION = 0.1
 const DECELERATION = 0.1
 
-@export var checkpoints: Array
+@export var checkpoints: Array[NodePath]
 var current_checkpoint = -1
 
 @onready var gc := $GrappleController
@@ -21,6 +21,7 @@ var animation_override: bool = false
 var control_override: bool = false
 
 var will_die = false
+var god_mode = true
 
 func _process(_delta):
 	var closest_distance: float = 999.0
@@ -33,11 +34,10 @@ func _process(_delta):
 			closest_distance = distance
 			closest_checkpoint = checkpoints.find(checkpoint, 0)
 
-	if closest_distance <= 15 and closest_checkpoint > current_checkpoint and !get_node(checkpoints[closest_checkpoint]).unlocked:
+	if closest_distance <= 15 and !get_node(checkpoints[closest_checkpoint]).unlocked:
 		get_node(checkpoints[closest_checkpoint]).unlock()
-		current_checkpoint = closest_checkpoint
-		print("Unlocking checkpoint ")
-		print(current_checkpoint)
+		if closest_checkpoint > current_checkpoint:
+			current_checkpoint = closest_checkpoint
 
 func _physics_process(delta):
 	if Input.is_action_pressed("reset") and !control_override:
@@ -45,7 +45,7 @@ func _physics_process(delta):
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	elif will_die:
+	elif will_die and !god_mode:
 		health.kill()
 	
 	if (Input.is_action_just_pressed("increase_length") or Input.is_action_pressed("increase_length_key")) and gc.rest_length < 30 and !control_override:
@@ -88,9 +88,6 @@ func _physics_process(delta):
 		will_die = true
 	else:
 		will_die = false
-	
-	if velocity.y != 0:
-		print(velocity.y)
 	
 	move_and_slide()
 
