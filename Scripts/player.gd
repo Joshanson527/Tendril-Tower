@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal respawn()
+signal win()
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -200.0
@@ -21,7 +22,7 @@ var animation_override: bool = false
 var control_override: bool = false
 
 var will_die = false
-var god_mode = true
+var god_mode = false
 
 func _process(_delta):
 	var closest_distance: float = 999.0
@@ -121,3 +122,15 @@ func _on_transition_respawn_fade():
 	
 	animation_override = false
 	control_override = false
+
+func _on_win_area_area_entered(area: Area2D) -> void:
+	control_override = true
+	animation_override = true
+	emit_signal("win")
+	sprite.play("left")
+	sprite.pause()
+	await get_tree().create_timer(0.5).timeout
+	sprite.play("right")
+	sprite.pause()
+	await get_tree().create_timer(0.5).timeout
+	sprite.play("idle")

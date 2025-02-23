@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://d4i7ayto368e8" path="res://Assets/Cat_Notice.png" id="8_5od0u"]
 [ext_resource type="SpriteFrames" uid="uid://djcclcf7e8tnn" path="res://Assets/animations.tres" id="9_3ruch"]
 [ext_resource type="Texture2D" uid="uid://dybkgqj3wg4va" path="res://Assets/Cat_Nudge.png" id="9_5ttd8"]
-[ext_resource type="Script" path="res://Scenes/animation_player.gd" id="10_0t8xe"]
-[ext_resource type="Script" path="res://Scenes/cat.gd" id="10_gyvki"]
+[ext_resource type="Script" path="res://Scripts/animation_player.gd" id="10_0t8xe"]
+[ext_resource type="Script" path="res://Scripts/cat.gd" id="10_gyvki"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6jerh"]
 shader = ExtResource("4_0vvm7")
