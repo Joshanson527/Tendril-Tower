@@ -19,10 +19,12 @@ var current_checkpoint = -1
 @export var rotation_speed: float = 10.0
 
 var animation_override: bool = false
-var control_override: bool = false
+@export var control_override: bool = false
 
 var will_die = false
 var god_mode = false
+
+@export var friction: float = 1.0
 
 func _process(_delta):
 	var closest_distance: float = 999.0
@@ -65,6 +67,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, DECELERATION)
 		if is_on_floor() and !animation_override:
+			velocity.x = move_toward(velocity.x, 0, friction * delta)
 			sprite.play("idle")
 	
 	if Input.is_action_just_pressed("jump") and (is_on_floor() || gc.launched) and !control_override:
@@ -123,7 +126,7 @@ func _on_transition_respawn_fade():
 	animation_override = false
 	control_override = false
 
-func _on_win_area_area_entered(area: Area2D) -> void:
+func _on_win_area_area_entered(_area):
 	control_override = true
 	animation_override = true
 	emit_signal("win")

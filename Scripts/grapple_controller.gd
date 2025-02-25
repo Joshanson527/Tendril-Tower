@@ -12,10 +12,17 @@ extends Node2D
 @export var launched = false
 @export var target: Vector2
 
+var grapple_override = false
+
 func _process(delta):
+	grapple_override = player.control_override
+	
+	if grapple_override:
+		retract()
+	
 	ray.look_at(get_global_mouse_position())
 	
-	if Input.is_action_just_pressed("grapple"):
+	if Input.is_action_just_pressed("grapple") and !grapple_override:
 		launch()
 	if Input.is_action_just_released("grapple"):
 		retract()

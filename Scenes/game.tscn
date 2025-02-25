@@ -45,6 +45,7 @@ size = Vector2(158, 20)
 position = Vector2(-1510, 0)
 scale = Vector2(0.5, 0.5)
 checkpoints = Array[NodePath]([NodePath("../checkpoint_0"), NodePath("../checkpoint_1"), NodePath("../checkpoint_2"), NodePath("../checkpoint_3"), NodePath("../checkpoint_4"), NodePath("../checkpoint_5"), NodePath("../checkpoint_6"), NodePath("../checkpoint_7"), NodePath("../checkpoint_8"), NodePath("../checkpoint_9"), NodePath("../checkpoint_10"), NodePath("../checkpoint_11"), NodePath("../checkpoint_12"), NodePath("../checkpoint_13")])
+friction = 200.0
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 process_mode = 3
