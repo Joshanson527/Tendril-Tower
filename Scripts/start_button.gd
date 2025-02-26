@@ -2,7 +2,7 @@ extends TextureButton
 
 @onready var transition := $"../AnimatedSprite2D/Camera2D/Transition"
 
-var next_scene = preload("res://Scenes/game.tscn")
+var next_scene = preload("res://Scenes/level2.tscn")
 
 func _process(_delta):
 	grab_focus()
