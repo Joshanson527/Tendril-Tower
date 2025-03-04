@@ -3,30 +3,36 @@ extends CharacterBody2D
 signal respawn()
 signal win()
 
-const SPEED = 100.0
-const JUMP_VELOCITY = -200.0
-const ACCELERATION = 0.1
-const DECELERATION = 0.1
+const SPEED: float = 100.0
+const JUMP_VELOCITY: float = -200.0
+const ACCELERATION: float = 0.1
+const DECELERATION: float = 0.1
 
 @export var checkpoints: Array[NodePath]
-var current_checkpoint = -1
+var current_checkpoint: int = -1
 
 @onready var gc := $GrappleController
 @onready var sprite := $AnimatedSprite2D
 @onready var health := $Health
 @onready var camera := $Camera2D
+@onready var time: Label = $"../time"
+@onready var deaths: Label = $"../deaths"
 
 @export var rotation_speed: float = 10.0
 
 var animation_override: bool = false
 @export var control_override: bool = false
 
-var will_die = false
-var god_mode = false
+var will_die: bool = false
+var god_mode: bool = false
+
+var death_count: int = 0
 
 @export var friction: float = 1.0
 
 func _process(_delta):
+	deaths.text = "Deaths: " + str(death_count)
+	
 	var closest_distance: float = 999.0
 	var closest_checkpoint
 	for checkpoint in checkpoints:
@@ -99,6 +105,7 @@ func _on_health_died(_entity):
 	animation_override = true
 	control_override = true
 	
+	death_count += 1
 	health.current = 1
 	
 	sprite.play("hit")

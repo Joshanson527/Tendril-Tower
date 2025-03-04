@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://cd8ui778jcwa5"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_u26kt"]
+[ext_resource type="Script" uid="uid://buhsbqttjgo42" path="res://Scripts/player.gd" id="1_u26kt"]
 [ext_resource type="SpriteFrames" uid="uid://djcclcf7e8tnn" path="res://Assets/animations.tres" id="2_vcd15"]
-[ext_resource type="Script" path="res://Scripts/grapple_controller.gd" id="3_igjp6"]
+[ext_resource type="Script" uid="uid://0twposd2hwby" path="res://Scripts/grapple_controller.gd" id="3_igjp6"]
 [ext_resource type="Texture2D" uid="uid://btbtsx7dkc7j" path="res://Assets/vine.png" id="4_4rdwv"]
-[ext_resource type="Script" path="res://addons/health_hitbox_hurtbox/health/health.gd" id="4_yx40d"]
-[ext_resource type="Script" path="res://addons/health_hitbox_hurtbox/2d/hurt_box_2d/hurt_box_2d.gd" id="5_c414t"]
+[ext_resource type="Script" uid="uid://bauy6qo0nnd2w" path="res://addons/health_hitbox_hurtbox/health/health.gd" id="4_yx40d"]
+[ext_resource type="Script" uid="uid://skx1kctwo6t6" path="res://addons/health_hitbox_hurtbox/2d/hurt_box_2d/hurt_box_2d.gd" id="5_c414t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vxup0"]
 radius = 5.0

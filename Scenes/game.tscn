@@ -1,20 +1,22 @@
-[gd_scene load_steps=21 format=4 uid="uid://c3pov7iy11n5i"]
+[gd_scene load_steps=23 format=4 uid="uid://c3pov7iy11n5i"]
 
 [ext_resource type="PackedScene" uid="uid://cd8ui778jcwa5" path="res://Scenes/player.tscn" id="1_qo5qs"]
-[ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="3_q2vnv"]
-[ext_resource type="Shader" path="res://Scripts/blur.gdshader" id="3_q11j1"]
+[ext_resource type="Script" uid="uid://bnfb0odewb4rw" path="res://Scripts/pause_menu.gd" id="3_q2vnv"]
+[ext_resource type="Shader" uid="uid://dfb4rvath6v8s" path="res://Scripts/blur.gdshader" id="3_q11j1"]
 [ext_resource type="Texture2D" uid="uid://b0oom6y5tw7li" path="res://Assets/icon.svg" id="4_eatly"]
+[ext_resource type="Script" uid="uid://bpfuumtaltakx" path="res://Scripts/timer.gd" id="5_nnt18"]
 [ext_resource type="FontFile" uid="uid://b4qjra5pja0aa" path="res://Assets/upheavtt.ttf" id="5_o8e1m"]
-[ext_resource type="Script" path="res://Scripts/quit_button.gd" id="5_owtng"]
-[ext_resource type="Script" path="res://Scripts/game_transition.gd" id="7_2ufiu"]
+[ext_resource type="Script" uid="uid://cjijfnx7gsjm" path="res://Scripts/quit_button.gd" id="5_owtng"]
+[ext_resource type="Script" uid="uid://casofa62j2o6t" path="res://Scripts/game_transition.gd" id="7_2ufiu"]
 [ext_resource type="Texture2D" uid="uid://cyrwdepm1n2fi" path="res://Assets/button_idle.png" id="7_bn45w"]
-[ext_resource type="Shader" path="res://Scripts/transition.gdshader" id="7_s2f2k"]
+[ext_resource type="Shader" uid="uid://wkac2tvme1ct" path="res://Scripts/transition.gdshader" id="7_s2f2k"]
 [ext_resource type="Texture2D" uid="uid://cbd7osm5yqafd" path="res://Assets/button_pressed.png" id="8_wbrl0"]
 [ext_resource type="TileSet" uid="uid://bicrs0mxs5eiw" path="res://Assets/tilemap.tres" id="9_7b2d8"]
 [ext_resource type="Texture2D" uid="uid://wwp1c7ouv6gs" path="res://Assets/button_hover.png" id="9_xgdtp"]
 [ext_resource type="SpriteFrames" uid="uid://djcclcf7e8tnn" path="res://Assets/animations.tres" id="13_ea7l3"]
-[ext_resource type="Script" path="res://Scripts/checkpoint.gd" id="14_078l1"]
-[ext_resource type="Script" path="res://Scripts/friend.gd" id="15_xekov"]
+[ext_resource type="Script" uid="uid://pdc3010mq3l5" path="res://Scripts/checkpoint.gd" id="14_078l1"]
+[ext_resource type="Script" uid="uid://ddb061yx54fki" path="res://Scripts/friend.gd" id="15_xekov"]
+[ext_resource type="LabelSettings" uid="uid://que3ngvakiaa" path="res://Assets/label.tres" id="16_ewbju"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4otfu"]
 shader = ExtResource("7_s2f2k")
@@ -22,7 +24,7 @@ shader_parameter/AspectRatio = 1.5
 shader_parameter/Diamonds = 29.515
 shader_parameter/pixel_size = 0.08
 shader_parameter/height = 1.0
-shader_parameter/disable_pixel = null
+shader_parameter/disable_pixel = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mdeka"]
 shader = ExtResource("3_q11j1")
@@ -58,6 +60,7 @@ position_smoothing_enabled = true
 
 [node name="Transition" type="ColorRect" parent="Character/Camera2D"]
 process_mode = 3
+visible = false
 z_index = 15
 material = SubResource("ShaderMaterial_4otfu")
 offset_left = 5108.04
@@ -71,10 +74,10 @@ script = ExtResource("7_2ufiu")
 
 [node name="Background" type="ColorRect" parent="Character"]
 z_index = -20
-offset_left = -6034.0
-offset_top = -6216.0
-offset_right = -5994.0
-offset_bottom = -6176.0
+offset_left = -6020.0
+offset_top = -6214.0
+offset_right = -5980.0
+offset_bottom = -6174.0
 scale = Vector2(308.328, 308.328)
 color = Color(0, 0.780392, 1, 1)
 
@@ -399,6 +402,44 @@ scale = Vector2(0.175, 0.175)
 text = "The end"
 label_settings = SubResource("LabelSettings_qpfy7")
 
+[node name="time" type="Label" parent="."]
+offset_left = -80.0
+offset_top = -2844.0
+offset_right = 76.0
+offset_bottom = -2790.0
+scale = Vector2(0.173826, 0.173826)
+text = "Time:"
+label_settings = ExtResource("16_ewbju")
+
+[node name="deaths" type="Label" parent="."]
+offset_left = 24.0
+offset_top = -2844.0
+offset_right = 180.0
+offset_bottom = -2790.0
+scale = Vector2(0.173826, 0.173826)
+text = "Deaths:"
+label_settings = ExtResource("16_ewbju")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TimerBox" type="ColorRect" parent="CanvasLayer"]
+z_index = 14
+offset_right = 198.0
+offset_bottom = 70.0
+scale = Vector2(0.737411, 0.737411)
+color = Color(0.233925, 0.233925, 0.233925, 1)
+
+[node name="Timer" type="Label" parent="CanvasLayer/TimerBox"]
+layout_mode = 0
+offset_left = 35.2585
+offset_top = 12.2049
+offset_right = 155.258
+offset_bottom = 66.2049
+scale = Vector2(0.820362, 0.820362)
+text = "0.00"
+label_settings = ExtResource("16_ewbju")
+script = ExtResource("5_nnt18")
+
 [connection signal="respawn" from="Character" to="Character/Camera2D/Transition" method="_on_character_respawn"]
 [connection signal="win" from="Character" to="AnimatedSprite2D" method="win"]
 [connection signal="win" from="Character" to="AnimatedSprite2D2" method="win"]
@@ -406,6 +447,7 @@ label_settings = SubResource("LabelSettings_qpfy7")
 [connection signal="win" from="Character" to="AnimatedSprite2D4" method="win"]
 [connection signal="win" from="Character" to="AnimatedSprite2D5" method="win"]
 [connection signal="win" from="Character" to="AnimatedSprite2D6" method="win"]
+[connection signal="win" from="Character" to="CanvasLayer/TimerBox/Timer" method="stop"]
 [connection signal="respawn_fade" from="Character/Camera2D/Transition" to="Character" method="_on_transition_respawn_fade"]
 [connection signal="pressed" from="PauseMenu/QuitButton" to="Character/Camera2D/Transition" method="_on_quit_pressed"]
 [connection signal="pressed" from="PauseMenu/QuitButton" to="PauseMenu/QuitButton" method="_on_pressed"]

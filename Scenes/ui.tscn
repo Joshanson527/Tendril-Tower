@@ -1,16 +1,19 @@
-[gd_scene load_steps=37 format=4 uid="uid://gyuqs5n38mnv"]
+[gd_scene load_steps=40 format=4 uid="uid://gyuqs5n38mnv"]
 
-[ext_resource type="Script" path="res://Scripts/start_button.gd" id="1_7r064"]
+[ext_resource type="Script" uid="uid://dl7h7yxn8x1o4" path="res://Scripts/start_button.gd" id="1_7r064"]
 [ext_resource type="FontFile" uid="uid://b4qjra5pja0aa" path="res://Assets/upheavtt.ttf" id="1_n7osn"]
-[ext_resource type="Script" path="res://Scripts/menu_transition.gd" id="3_54vog"]
-[ext_resource type="Shader" path="res://Scripts/transition.gdshader" id="4_0vvm7"]
+[ext_resource type="Texture2D" uid="uid://cyrwdepm1n2fi" path="res://Assets/button_idle.png" id="3_8fs27"]
+[ext_resource type="Script" uid="uid://cswog4vr3m171" path="res://Scripts/menu_transition.gd" id="3_54vog"]
+[ext_resource type="Shader" uid="uid://wkac2tvme1ct" path="res://Scripts/transition.gdshader" id="4_0vvm7"]
+[ext_resource type="Texture2D" uid="uid://cbd7osm5yqafd" path="res://Assets/button_pressed.png" id="4_whq80"]
+[ext_resource type="Texture2D" uid="uid://wwp1c7ouv6gs" path="res://Assets/button_hover.png" id="5_kuui0"]
 [ext_resource type="TileSet" uid="uid://bicrs0mxs5eiw" path="res://Assets/tilemap.tres" id="5_msgdh"]
 [ext_resource type="Texture2D" uid="uid://d22gsa7p1ns0" path="res://Assets/Cat_Idle.png" id="7_7ousm"]
 [ext_resource type="Texture2D" uid="uid://d4i7ayto368e8" path="res://Assets/Cat_Notice.png" id="8_5od0u"]
 [ext_resource type="SpriteFrames" uid="uid://djcclcf7e8tnn" path="res://Assets/animations.tres" id="9_3ruch"]
 [ext_resource type="Texture2D" uid="uid://dybkgqj3wg4va" path="res://Assets/Cat_Nudge.png" id="9_5ttd8"]
-[ext_resource type="Script" path="res://Scripts/animation_player.gd" id="10_0t8xe"]
-[ext_resource type="Script" path="res://Scripts/cat.gd" id="10_gyvki"]
+[ext_resource type="Script" uid="uid://cyncoh4ye4rp1" path="res://Scripts/animation_player.gd" id="10_0t8xe"]
+[ext_resource type="Script" uid="uid://6ymjmpj5xn8r" path="res://Scripts/cat.gd" id="10_gyvki"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6jerh"]
 shader = ExtResource("4_0vvm7")
@@ -18,7 +21,7 @@ shader_parameter/AspectRatio = 1.5
 shader_parameter/Diamonds = 10.0
 shader_parameter/pixel_size = 0.08
 shader_parameter/height = -1.0
-shader_parameter/disable_pixel = null
+shader_parameter/disable_pixel = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v5nqn"]
 shader = ExtResource("4_0vvm7")
@@ -26,7 +29,7 @@ shader_parameter/AspectRatio = 1.5
 shader_parameter/Diamonds = 29.515
 shader_parameter/pixel_size = 0.08
 shader_parameter/height = -1.5
-shader_parameter/disable_pixel = null
+shader_parameter/disable_pixel = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_axdgs"]
 atlas = ExtResource("7_7ousm")
@@ -423,9 +426,9 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3xdjo"]
 _data = {
-"RESET": SubResource("Animation_hve64"),
-"menu": SubResource("Animation_60lsd"),
-"opening_cutscene": SubResource("Animation_rk6ib")
+&"RESET": SubResource("Animation_hve64"),
+&"menu": SubResource("Animation_60lsd"),
+&"opening_cutscene": SubResource("Animation_rk6ib")
 }
 
 [node name="UI" type="Control"]
@@ -457,32 +460,6 @@ tile_set = ExtResource("5_msgdh")
 scale = Vector2(7, 7)
 tile_map_data = PackedByteArray("AAAAAAAAAQAGAAIAAAAAAAEAAQAGAAIAAAAAAAIAAQAGAAIAAAAAAAMAAQAGAAIAAAAAAAQAAQAGAAIAAAAAAAUAAQAGAAIAAAAAAP//AQAGAAIAAAAAAP7/AQAGAAIAAAAAAP3/AQAGAAIAAAAAAAYAAQAGAAIAAAAAAAcAAQAGAAIAAAAAAAgAAQAGAAIAAAAAAPz/AQAGAAIAAAA=")
 tile_set = ExtResource("5_msgdh")
-
-[node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 620.0
-offset_top = 366.0
-offset_right = 700.0
-offset_bottom = 406.0
-scale = Vector2(4, 4)
-script = ExtResource("1_7r064")
-
-[node name="Label" type="Label" parent="TextureButton"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -51.75
-offset_top = -1.5
-offset_right = 452.25
-offset_bottom = 145.5
-grow_horizontal = 2
-scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("1_n7osn")
-theme_override_font_sizes/font_size = 80
-text = "Press enter
-to start"
-horizontal_alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1584, -7521)
@@ -518,10 +495,39 @@ script = ExtResource("10_gyvki")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_3xdjo")
+&"": SubResource("AnimationLibrary_3xdjo")
 }
 autoplay = "opening_cutscene"
 script = ExtResource("10_0t8xe")
 
-[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 366.0
+offset_right = 700.0
+offset_bottom = 406.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("3_8fs27")
+texture_pressed = ExtResource("4_whq80")
+texture_hover = ExtResource("5_kuui0")
+texture_disabled = ExtResource("4_whq80")
+script = ExtResource("1_7r064")
+
+[node name="Label" type="Label" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -62.5
+offset_top = -2.5
+offset_right = 441.5
+offset_bottom = 144.5
+grow_horizontal = 2
+scale = Vector2(0.250029, 0.250029)
+theme_override_fonts/font = ExtResource("1_n7osn")
+theme_override_font_sizes/font_size = 80
+text = "Start"
+horizontal_alignment = 1
+
 [connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
