@@ -26,7 +26,15 @@ var god_mode = false
 
 @export var friction: float = 1.0
 
+func restart():
+	var tree = get_tree()
+	if tree:
+		tree.change_scene_to_file("res://Scenes/ui.tscn")
+
 func _process(_delta):
+	if (Input.is_action_just_pressed("restart")):
+		restart()
+		
 	var closest_distance: float = 999.0
 	var closest_checkpoint
 	for checkpoint in checkpoints:
