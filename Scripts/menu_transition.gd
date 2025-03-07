@@ -1,5 +1,8 @@
 extends ColorRect
 
+func _ready():
+	fade_out()
+
 func fade_in():
 	var tween := get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)

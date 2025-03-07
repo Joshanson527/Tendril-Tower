@@ -3,8 +3,14 @@ extends Control
 @onready var blur := $Blur
 @onready var quit_button := $QuitButton
 @onready var player := $"../Character"
+@onready var timer: Label = $"../CanvasLayer/TimerBox/Timer"
 
 var moving: bool = false
+
+#func _ready():
+	#await get_tree().create_timer(1).timeout
+	#player.set_process(true)
+	#timer.set_process(true)
 
 func _process(_delta):
 	position = player.position + Vector2(-115.2, -80.8)

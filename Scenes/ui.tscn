@@ -79,29 +79,29 @@ region = Rect2(0, 72, 18, 18)
 atlas = ExtResource("8_5od0u")
 region = Rect2(0, 90, 18, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ab3j"]
-atlas = ExtResource("9_5ttd8")
-region = Rect2(0, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_231o2"]
-atlas = ExtResource("9_5ttd8")
-region = Rect2(0, 18, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jx2al"]
-atlas = ExtResource("9_5ttd8")
-region = Rect2(0, 36, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u4itl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fs27"]
 atlas = ExtResource("9_5ttd8")
 region = Rect2(0, 54, 18, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_87rbx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_whq80"]
+atlas = ExtResource("9_5ttd8")
+region = Rect2(0, 36, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuui0"]
 atlas = ExtResource("9_5ttd8")
 region = Rect2(0, 72, 18, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2dddw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_smy1h"]
+atlas = ExtResource("9_5ttd8")
+region = Rect2(0, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkjmk"]
 atlas = ExtResource("9_5ttd8")
 region = Rect2(0, 90, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d42i4"]
+atlas = ExtResource("9_5ttd8")
+region = Rect2(0, 18, 18, 18)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ilwto"]
 animations = [{
@@ -153,22 +153,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8ab3j")
+"texture": SubResource("AtlasTexture_8fs27")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_231o2")
+"texture": SubResource("AtlasTexture_whq80")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jx2al")
+"texture": SubResource("AtlasTexture_kuui0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_u4itl")
+"texture": SubResource("AtlasTexture_smy1h")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_87rbx")
+"texture": SubResource("AtlasTexture_lkjmk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2dddw")
+"texture": SubResource("AtlasTexture_d42i4")
 }],
 "loop": false,
 "name": &"push",
@@ -489,7 +489,7 @@ script = ExtResource("3_54vog")
 position = Vector2(-1652, -7518)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_ilwto")
-animation = &"idle"
+animation = &"push"
 autoplay = "idle"
 script = ExtResource("10_gyvki")
 

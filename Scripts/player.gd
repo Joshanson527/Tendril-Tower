@@ -8,47 +8,73 @@ const JUMP_VELOCITY: float = -200.0
 const ACCELERATION: float = 0.1
 const DECELERATION: float = 0.1
 
-@export var checkpoints: Array[NodePath]
-var current_checkpoint: int = -1
-
 @onready var gc := $GrappleController
 @onready var sprite := $AnimatedSprite2D
 @onready var health := $Health
 @onready var camera := $Camera2D
-@onready var time: Label = $"../time"
-@onready var deaths: Label = $"../deaths"
+@onready var level: Node2D = $"../Level"
 
 @export var rotation_speed: float = 10.0
+
+var win_area: Area2D
+var time: Label
+var deaths: Label
+var checkpoints: Array[AnimatedSprite2D]
+var current_checkpoint: int = 13
 
 var animation_override: bool = false
 @export var control_override: bool = false
 
 var will_die: bool = false
-var god_mode: bool = false
+var god_mode: bool =true
 
 var death_count: int = 0
 
 @export var friction: float = 1.0
 
+var level_ready: bool = false
+
+func _ready():
+	while level == null:
+		pass
+	
+	init()
+
+func init():
+	win_area = level.win_area
+	time = level.time_counter
+	deaths = level.death_counter
+	checkpoints = level.checkpoints
+	
+	win_area.area_entered.connect(_on_win_area_entered)
+	
+	level_ready = true
+
 func _process(_delta):
+	if !level_ready:
+		return
+	
 	deaths.text = "Deaths: " + str(death_count)
 	
 	var closest_distance: float = 999.0
 	var closest_checkpoint
 	for checkpoint in checkpoints:
 		var pos1 = self.global_position
-		var pos2 = get_node(checkpoint).global_position
+		var pos2 = checkpoint.global_position
 		var distance = sqrt((pos2.x - pos1.x) ** 2 + (pos2.y - pos1.y) ** 2)
 		if distance < closest_distance: 
 			closest_distance = distance
 			closest_checkpoint = checkpoints.find(checkpoint, 0)
 
-	if closest_distance <= 15 and !get_node(checkpoints[closest_checkpoint]).unlocked:
-		get_node(checkpoints[closest_checkpoint]).unlock()
+	if closest_distance <= 15 and !checkpoints[closest_checkpoint].unlocked:
+		checkpoints[closest_checkpoint].unlock()
 		if closest_checkpoint > current_checkpoint:
 			current_checkpoint = closest_checkpoint
 
 func _physics_process(delta):
+	if !level_ready:
+		return
+	
 	if Input.is_action_pressed("reset") and !control_override:
 		health.kill()
 	
@@ -76,7 +102,7 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, friction * delta)
 			sprite.play("idle")
 	
-	if Input.is_action_just_pressed("jump") and (is_on_floor() || gc.launched) and !control_override:
+	if Input.is_action_pressed("jump") and (is_on_floor() || gc.launched) and !control_override:
 		velocity.y += JUMP_VELOCITY
 		gc.retract()
 	
@@ -119,7 +145,7 @@ func _on_health_died(_entity):
 	emit_signal("respawn")
 	await get_tree().create_timer(1).timeout # Wait for fade out to happen
 	
-	position = get_node(checkpoints[current_checkpoint]).position
+	position = checkpoints[current_checkpoint].position
 	sprite.play("grow")
 	sprite.pause()
 
@@ -133,7 +159,7 @@ func _on_transition_respawn_fade():
 	animation_override = false
 	control_override = false
 
-func _on_win_area_area_entered(_area):
+func _on_win_area_entered(_area):
 	control_override = true
 	animation_override = true
 	emit_signal("win")

@@ -1,0 +1,102 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpuv2noed7vg7"]
+
+[ext_resource type="FontFile" uid="uid://b4qjra5pja0aa" path="res://Assets/upheavtt.ttf" id="1_jsrd8"]
+[ext_resource type="Shader" uid="uid://wkac2tvme1ct" path="res://Scripts/transition.gdshader" id="2_wbdvm"]
+[ext_resource type="Texture2D" uid="uid://cyrwdepm1n2fi" path="res://Assets/button_idle.png" id="3_q3rjx"]
+[ext_resource type="Script" uid="uid://cswog4vr3m171" path="res://Scripts/menu_transition.gd" id="3_wbdvm"]
+[ext_resource type="Texture2D" uid="uid://cbd7osm5yqafd" path="res://Assets/button_pressed.png" id="4_6swd7"]
+[ext_resource type="Texture2D" uid="uid://wwp1c7ouv6gs" path="res://Assets/button_hover.png" id="5_7qvly"]
+[ext_resource type="Script" uid="uid://cd2ohh6c5ylns" path="res://Scripts/level_button.gd" id="6_rfqti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8i7c"]
+shader = ExtResource("2_wbdvm")
+shader_parameter/AspectRatio = 1.5
+shader_parameter/Diamonds = 29.515
+shader_parameter/pixel_size = 0.08
+shader_parameter/height = 1.0
+shader_parameter/disable_pixel = false
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 390.0
+offset_top = 35.0
+offset_right = 1178.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.445966, 0.445966)
+theme_override_fonts/font = ExtResource("1_jsrd8")
+theme_override_font_sizes/font_size = 120
+text = "Level Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Background" type="ColorRect" parent="UI"]
+z_index = -20
+layout_mode = 0
+offset_left = -1775.0
+offset_top = -1971.0
+offset_right = -1665.0
+offset_bottom = -1866.0
+scale = Vector2(42.5256, 42.5256)
+color = Color(0, 0.780392, 1, 1)
+
+[node name="Transition" type="ColorRect" parent="UI"]
+z_index = 15
+material = SubResource("ShaderMaterial_g8i7c")
+layout_mode = 0
+offset_left = 2232.0
+offset_top = 560.0
+offset_right = 4232.0
+offset_bottom = 1855.0
+rotation = 2.79253
+scale = Vector2(1.40577, 1.22349)
+color = Color(0, 0, 0, 1)
+script = ExtResource("3_wbdvm")
+
+[node name="Level1" type="TextureButton" parent="UI"]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 128.0
+offset_right = 496.0
+offset_bottom = 144.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("3_q3rjx")
+texture_pressed = ExtResource("4_6swd7")
+texture_hover = ExtResource("5_7qvly")
+texture_disabled = ExtResource("4_6swd7")
+script = ExtResource("6_rfqti")
+
+[node name="Label" type="Label" parent="UI/Level1"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.0
+offset_top = -1.5
+offset_right = 443.0
+offset_bottom = 145.5
+grow_horizontal = 2
+scale = Vector2(0.250029, 0.250029)
+theme_override_fonts/font = ExtResource("1_jsrd8")
+theme_override_font_sizes/font_size = 60
+text = "Level 1"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="UI/Level1" to="UI/Level1" method="_on_level_1_pressed"]
