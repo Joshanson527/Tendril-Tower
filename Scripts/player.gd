@@ -20,13 +20,13 @@ var win_area: Area2D
 var time: Label
 var deaths: Label
 var checkpoints: Array[AnimatedSprite2D]
-var current_checkpoint: int = 13
+var current_checkpoint: int = 0
 
 var animation_override: bool = false
 @export var control_override: bool = false
 
 var will_die: bool = false
-var god_mode: bool =true
+var god_mode: bool = false
 
 var death_count: int = 0
 

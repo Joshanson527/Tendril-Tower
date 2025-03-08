@@ -1,8 +1,9 @@
 extends Control
 
-@onready var blur := $Blur
-@onready var quit_button := $QuitButton
-@onready var player := $"../Character"
+@onready var blur: Sprite2D = $Blur
+@onready var quit_button: TextureButton = $QuitButton
+@onready var menu_button: TextureButton = $MenuButton
+@onready var player: CharacterBody2D = $"../Character"
 @onready var timer: Label = $"../CanvasLayer/TimerBox/Timer"
 
 var moving: bool = false
@@ -22,6 +23,7 @@ func _process(_delta):
 				moving = true
 				blur.material.set_shader_parameter('lod', 2.5)
 				quit_button.slide_in()
+				menu_button.slide_in()
 				tree.paused = true
 				await tree.create_timer(0.5).timeout
 				moving = false
@@ -29,6 +31,7 @@ func _process(_delta):
 				moving = true
 				blur.material.set_shader_parameter('lod', 0.0)
 				quit_button.slide_out()
+				menu_button.slide_out()
 				tree.paused = false
 				await tree.create_timer(0.5).timeout
 				moving = false 

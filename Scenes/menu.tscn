@@ -58,6 +58,7 @@ scale = Vector2(42.5256, 42.5256)
 color = Color(0, 0.780392, 1, 1)
 
 [node name="Transition" type="ColorRect" parent="UI"]
+visible = false
 z_index = 15
 material = SubResource("ShaderMaterial_g8i7c")
 layout_mode = 0
@@ -99,4 +100,34 @@ theme_override_font_sizes/font_size = 60
 text = "Level 1"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="UI/Level1" to="UI/Level1" method="_on_level_1_pressed"]
+[node name="Level2" type="TextureButton" parent="UI"]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 128.0
+offset_right = 496.0
+offset_bottom = 144.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("3_q3rjx")
+texture_pressed = ExtResource("4_6swd7")
+texture_hover = ExtResource("5_7qvly")
+texture_disabled = ExtResource("4_6swd7")
+script = ExtResource("6_rfqti")
+
+[node name="Label" type="Label" parent="UI/Level2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.0
+offset_top = -1.5
+offset_right = 443.0
+offset_bottom = 145.5
+grow_horizontal = 2
+scale = Vector2(0.250029, 0.250029)
+theme_override_fonts/font = ExtResource("1_jsrd8")
+theme_override_font_sizes/font_size = 60
+text = "Level 1"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="UI/Level1" to="UI/Level1" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Level2" to="UI/Level2" method="_on_button_pressed"]

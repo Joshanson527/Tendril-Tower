@@ -7,7 +7,7 @@ extends TextureButton
 
 var press_delay: bool = false
 
-func _on_level_1_pressed():
+func _on_button_pressed():
 	if press_delay == true:
 		return
 	press_delay = true
@@ -16,14 +16,18 @@ func _on_level_1_pressed():
 	
 	var tree = get_tree()
 	if tree:
-		var level = level_base.instantiate()
-		var level1 = level_1.instantiate()
-		level.name = "World"
-		level1.name = "Level"
-		level.add_child(level1)
+		var world = level_base.instantiate()
+		world.name = "World"
+		
+		var level
+		if name == "Level1":
+			level = level_1.instantiate()
+		level.name = "Level"
+			
+		world.add_child(level)
 		
 		ui.hide()
-		get_node("../..").add_child(level)
+		get_node("../..").add_child(world)
 		
 		await get_tree().create_timer(3).timeout
 		press_delay = false

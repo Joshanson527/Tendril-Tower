@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c3pov7iy11n5i"]
+[gd_scene load_steps=17 format=3 uid="uid://c3pov7iy11n5i"]
 
 [ext_resource type="PackedScene" uid="uid://cd8ui778jcwa5" path="res://Scenes/player.tscn" id="1_qo5qs"]
 [ext_resource type="Script" uid="uid://bnfb0odewb4rw" path="res://Scripts/pause_menu.gd" id="3_q2vnv"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cjijfnx7gsjm" path="res://Scripts/quit_button.gd" id="5_owtng"]
 [ext_resource type="Script" uid="uid://casofa62j2o6t" path="res://Scripts/game_transition.gd" id="7_2ufiu"]
 [ext_resource type="Texture2D" uid="uid://cyrwdepm1n2fi" path="res://Assets/button_idle.png" id="7_bn45w"]
+[ext_resource type="Script" uid="uid://by7q73e0cdie5" path="res://Scenes/blur.gd" id="7_rfjv2"]
 [ext_resource type="Shader" uid="uid://wkac2tvme1ct" path="res://Scripts/transition.gdshader" id="7_s2f2k"]
 [ext_resource type="Texture2D" uid="uid://cbd7osm5yqafd" path="res://Assets/button_pressed.png" id="8_wbrl0"]
 [ext_resource type="Texture2D" uid="uid://wwp1c7ouv6gs" path="res://Assets/button_hover.png" id="9_xgdtp"]
@@ -84,13 +85,14 @@ material = SubResource("ShaderMaterial_1phco")
 position = Vector2(-57.6, -128.4)
 scale = Vector2(24.0781, 22.7812)
 texture = ExtResource("4_eatly")
+script = ExtResource("7_rfjv2")
 
 [node name="QuitButton" type="TextureButton" parent="PauseMenu"]
 z_index = 10
 layout_mode = 0
 offset_left = -250.0
 offset_right = -170.0
-offset_bottom = 40.0
+offset_bottom = 16.0
 scale = Vector2(1.25, 1.25)
 texture_normal = ExtResource("7_bn45w")
 texture_pressed = ExtResource("8_wbrl0")
@@ -100,6 +102,31 @@ texture_focused = ExtResource("7_bn45w")
 script = ExtResource("5_owtng")
 
 [node name="Label" type="Label" parent="PauseMenu/QuitButton"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 417.0
+offset_bottom = 72.0
+scale = Vector2(0.17, 0.17)
+theme_override_fonts/font = ExtResource("5_o8e1m")
+theme_override_font_sizes/font_size = 80
+text = "Quit game"
+
+[node name="MenuButton" type="TextureButton" parent="PauseMenu"]
+z_index = 10
+layout_mode = 0
+offset_left = -250.0
+offset_top = 27.6
+offset_right = -170.0
+offset_bottom = 43.6
+scale = Vector2(1.25, 1.25)
+texture_normal = ExtResource("7_bn45w")
+texture_pressed = ExtResource("8_wbrl0")
+texture_hover = ExtResource("9_xgdtp")
+texture_disabled = ExtResource("8_wbrl0")
+texture_focused = ExtResource("7_bn45w")
+script = ExtResource("5_owtng")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuButton"]
 layout_mode = 0
 offset_left = 5.0
 offset_right = 417.0
@@ -140,3 +167,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="respawn_fade" from="Character/Camera2D/Transition" to="Character" method="_on_transition_respawn_fade"]
 [connection signal="pressed" from="PauseMenu/QuitButton" to="Character/Camera2D/Transition" method="_on_quit_pressed"]
 [connection signal="pressed" from="PauseMenu/QuitButton" to="PauseMenu/QuitButton" method="_on_pressed"]
+[connection signal="pressed" from="PauseMenu/MenuButton" to="Character/Camera2D/Transition" method="_on_quit_pressed"]
+[connection signal="pressed" from="PauseMenu/MenuButton" to="PauseMenu/MenuButton" method="_on_pressed"]
