@@ -325,7 +325,7 @@ offset_top = -2917.0
 offset_right = 3348.0
 offset_bottom = -2770.0
 scale = Vector2(0.175, 0.175)
-text = "The end"
+text = "You win!"
 label_settings = SubResource("LabelSettings_6ioyp")
 metadata/_edit_use_anchors_ = true
 
